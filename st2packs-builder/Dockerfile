@@ -16,6 +16,7 @@ RUN apk add --no-cache python \
     make \
     musl-dev \
     python-dev \
+    rsync \
     sudo
 
 # Add st2common (orquesta must be installed separately otherwise there is an error when installing st2common)
