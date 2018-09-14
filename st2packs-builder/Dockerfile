@@ -16,9 +16,13 @@ RUN apk add --no-cache python \
     make \
     musl-dev \
     python-dev \
-    rsync \
     sudo
 
 # Add st2common (orquesta must be installed separately otherwise there is an error when installing st2common)
 RUN pip install -e git+https://github.com/StackStorm/orquesta.git@master#egg=orquesta
 RUN pip install -e git+https://github.com/StackStorm/st2#egg=st2common\&subdirectory=st2common
+
+# Before running st2-pack-install, ensure a basic st2.conf file exists and ARG PACKS is available
+ONBUILD RUN mkdir -p /etc/st2
+ONBUILD COPY files/st2.conf /etc/st2/st2.conf
+ONBUILD ARG PACKS
