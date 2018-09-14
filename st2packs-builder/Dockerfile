@@ -26,3 +26,4 @@ RUN pip install -e git+https://github.com/StackStorm/st2#egg=st2common\&subdirec
 ONBUILD RUN mkdir -p /etc/st2
 ONBUILD COPY files/st2.conf /etc/st2/st2.conf
 ONBUILD ARG PACKS
+ONBUILD RUN : "${PACKS:?Please add '--build-arg PACKS=\"<space separated list of pack names>\"'.}"
