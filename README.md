@@ -1,8 +1,8 @@
 # Overview
 
 By default, only system packs are available to StackStorm services when installed using the
-`stackstorm-enterprise-ha` helm chart. If you need additional packs, bake them into a custom docker
-image using the instructions below.
+stackstorm-enterprise-ha [helm chart](https://helm.stackstorm.com). If you need additional packs,
+bake them into a custom docker image using the instructions below.
 
 The `st2packs` image will mount `/opt/stackstorm/{packs,virtualenvs}` via a sidecar container in
 pods which need access to the packs. These volumes are mounted read-only. In the kubernetes cluster,
