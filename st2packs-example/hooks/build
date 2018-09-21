@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build --build-arg PACKS="email" -t stackstorm/st2packs:example .
+docker build --build-arg PACKS="st2" -t stackstorm/st2packs:example .
