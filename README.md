@@ -1,3 +1,5 @@
+[![Go to Docker Hub](https://img.shields.io/docker/build/stackstorm/st2packs.svg)](https://hub.docker.com/r/stackstorm/st2packs/)
+
 # Overview
 
 By default, only system packs are available to StackStorm services when installed using the
