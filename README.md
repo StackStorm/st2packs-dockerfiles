@@ -22,7 +22,9 @@ docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:lat
 
 where `<pack names>` is a space separated list of packs you want to install in the st2packs image
 and `<docker_registry>` is the registry URL. If you have enabled the k8s Docker Registry using
-`docker-registry.enabled = true` in `values.yaml`, then set `<docker_registry>` to `localhost:5000`.
+`docker-registry.enabled = true` in the Helm chart configuration `values.yaml` at
+https://github.com/stackstorm/stackstorm-enterprise-ha,
+then set `<docker_registry>` to `localhost:5000`.
 
 # Helper images
 
