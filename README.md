@@ -1,14 +1,32 @@
+[![Go to Docker Hub](https://img.shields.io/docker/build/stackstorm/st2packs.svg)](https://hub.docker.com/r/stackstorm/st2packs/)
+
 # Overview
 
-Two helper images are used to build the `st2packs` image. They are described below.
+By default, only system packs are available to StackStorm services when installed using the
+stackstorm-enterprise-ha [helm chart](https://helm.stackstorm.com). If you need additional packs,
+bake them into a custom docker image using the instructions below.
 
-# st2packs-builder
+The `st2packs` image will mount `/opt/stackstorm/{packs,virtualenvs}` via a sidecar container in
+pods which need access to the packs. These volumes are mounted read-only. In the kubernetes cluster,
+the `st2 pack install` command will not work.
 
-Includes all the dependencies required to run `st2-pack-install`.
+# Building the st2packs image
 
-# st2packs-runtime
+To build your own custom `st2packs` image, run:
 
-Used to minimize the size of the image containing the packs.
-Copies the `/opt/stackstorm/packs` and `/opt/stackstorm/virtualenvs` directories into an `alpine:3.8` image.
+```
+git clone git@github.com:stackstorm/st2packs-dockerfiles
+cd st2packs-dockerfiles
+docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:latest st2packs
+```
 
-We decided to use `alpine` instead of `scratch` because `alpine` is small (~4MB) and includes the `cp` command and required dependencies.
+where `<pack names>` is a space separated list of packs you want to install in the st2packs image
+and `<docker_registry>` is the registry URL. If you have enabled the k8s Docker Registry using
+`docker-registry.enabled = true` in the Helm chart configuration `values.yaml` at
+https://github.com/stackstorm/stackstorm-enterprise-ha,
+then set `<docker_registry>` to `localhost:5000`.
+
+# Helper images
+
+The `st2packs-builder` and `st2packs-runtime` directories each contain a Dockerfile for images that
+are used to simplify the `st2packs` Dockerfile.
