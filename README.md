@@ -3,7 +3,7 @@
 # Overview
 
 By default, only system packs are available to StackStorm services when installed using the
-stackstorm-enterprise-ha [helm chart](https://helm.stackstorm.com). If you need additional packs,
+stackstorm-ha [helm chart](https://helm.stackstorm.com). If you need additional packs,
 bake them into a custom docker image using the instructions below.
 
 The `st2packs` image will mount `/opt/stackstorm/{packs,virtualenvs}` via a sidecar container in
@@ -23,7 +23,7 @@ docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:lat
 where `<pack names>` is a space separated list of packs you want to install in the st2packs image
 and `<docker_registry>` is the registry URL. If you have enabled the k8s Docker Registry using
 `docker-registry.enabled = true` in the Helm chart configuration `values.yaml` at
-https://github.com/stackstorm/stackstorm-enterprise-ha,
+https://github.com/stackstorm/stackstorm-ha,
 then set `<docker_registry>` to `localhost:5000`.
 
 # Helper images

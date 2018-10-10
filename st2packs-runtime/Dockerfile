@@ -1,4 +1,5 @@
-FROM alpine:3.8
+ARG ST2_VERSION
+FROM stackstorm/st2:${ST2_VERSION}
 
 ONBUILD VOLUME ["/opt/stackstorm/packs", "/opt/stackstorm/virtualenvs"]
 
