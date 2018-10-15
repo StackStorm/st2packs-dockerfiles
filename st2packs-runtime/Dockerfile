@@ -1,5 +1,4 @@
-ARG ST2_VERSION
-FROM stackstorm/st2:${ST2_VERSION}
+FROM stackstorm/st2:3.0dev
 
 ONBUILD VOLUME ["/opt/stackstorm/packs", "/opt/stackstorm/virtualenvs"]
 
