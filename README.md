@@ -17,7 +17,7 @@ To build your own custom `st2packs` image, run:
 ```
 git clone git@github.com:stackstorm/st2packs-dockerfiles
 cd st2packs-dockerfiles
-docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:latest st2packs
+docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:latest st2packs-image
 ```
 
 where `<pack names>` is a space separated list of packs you want to install in the st2packs image
@@ -25,6 +25,19 @@ and `<docker_registry>` is the registry URL. If you have enabled the k8s Docker 
 `docker-registry.enabled = true` in the Helm chart configuration `values.yaml` at
 https://github.com/stackstorm/stackstorm-ha,
 then set `<docker_registry>` to `localhost:5000`.
+
+# Building the st2packs image with private packs
+
+In order to pull packs from private repository, you have to use a [deploy key](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys) for that specific repository and use it to pull it via SSH protocol.
+
+After you created the key, you can build the image as follows:
+
+```
+docker build --build-arg PACKS="<pack names>" --build-arg SSH_PRIVATE_KEY=${SSH_PRIVATE_KEY} -t ${DOCKER_REGISTRY}/st2packs:latest st2packs-image
+```
+
+where `<pack names>` can include links to private repositories (`git@github.com:<user>/<repository>.git`)
+and `SSH_PRIVATE_KEY` contains your private key.
 
 # Helper images
 
