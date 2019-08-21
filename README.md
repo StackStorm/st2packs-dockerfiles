@@ -17,7 +17,7 @@ To build your own custom `st2packs` image, run:
 ```
 git clone git@github.com:stackstorm/st2packs-dockerfiles
 cd st2packs-dockerfiles
-docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:latest st2packs
+docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:latest st2packs-image
 ```
 
 where `<pack names>` is a space separated list of packs you want to install in the st2packs image
