@@ -17,11 +17,11 @@ To build your own custom `st2packs` image, run:
 ```
 git clone git@github.com:stackstorm/st2packs-dockerfiles
 cd st2packs-dockerfiles
-docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:latest st2packs-image
+docker build --build-arg PACKS="<pack names>" -t ${DOCKER_REGISTRY}/st2packs:<version number> st2packs-image
 ```
 
 where `<pack names>` is a space separated list of packs you want to install in the st2packs image
-and `<docker_registry>` is the registry URL. The pack may be specified as a github url, or as a
+and `<docker_registry>` is the registry URL. '<version number>' should be used and incremented with each change to the pack contents, since using 'latest' as the pack will not tell helm when changes occur and upgrade will not occur. The pack may be specified as a github url, or as a
 local file (e.g. file://<path to file>). In the latter case, then you need to ensure these are
 COPY'd into the docker build environment. As an example,
 
